@@ -1,0 +1,29 @@
+# Tests of the public repository: build, vet, unit tests, and generated docs up to date.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+      - run: go build ./...
+      - run: go vet ./...
+      - run: go test ./...
+      - name: Docs up to date
+        run: |
+          go generate ./...
+          git diff --exit-code -- docs

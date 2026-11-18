@@ -11,6 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
+//go:generate go tool tfplugindocs generate --provider-name dimdams
+
 // Set by the release build.
 var version = "dev"
 

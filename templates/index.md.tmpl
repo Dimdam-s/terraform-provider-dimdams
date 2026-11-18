@@ -1,0 +1,31 @@
+---
+page_title: "Provider: Dimdam's"
+description: |-
+  {{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# Provider Dimdam's
+
+Le provider [Dimdam's](https://www.dimdams.com) gère la configuration de services d'hébergement **existants** : règles de pare-feu, alertes, variables d'environnement, clés SSH, tâches planifiées et domaine personnel. La commande et le renouvellement des services se font dans le tableau de bord ; le provider ne crée aucune dépense.
+
+*The Dimdam's provider manages the configuration of existing hosting services (firewall rules, alerts, environment variables, SSH keys, scheduled tasks, custom domain) through the Dimdam's REST API.*
+
+## Authentification
+
+Créez une clé d'API dans **Paramètres › Clés API** du tableau de bord, avec seulement les permissions utiles (`hosts:read`, `hosts:write`, et `hosts:exec` pour les clés SSH et les tâches qui lancent une commande), puis passez-la par la variable d'environnement `DIMDAMS_API_KEY` :
+
+```shell
+export DIMDAMS_API_KEY="dim_live_…"
+terraform init
+terraform plan
+```
+
+## Exemple
+
+{{ tffile "examples/provider/provider.tf" }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Documentation
+
+Guide complet et tutoriel pas à pas : [docs.dimdams.com/api/terraform](https://docs.dimdams.com/api/terraform/).
