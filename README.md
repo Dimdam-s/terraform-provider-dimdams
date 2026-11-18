@@ -15,7 +15,7 @@ Essai local sans publier : `go build -o ~/tf-dev/terraform-provider-dimdams .`, 
 
 ```hcl
 provider_installation {
-  dev_overrides { "dimdams/dimdams" = "/home/<vous>/tf-dev" }
+  dev_overrides { "dimdam-s/dimdams" = "/home/<vous>/tf-dev" }
   direct {}
 }
 ```
@@ -33,8 +33,8 @@ provider_installation {
 ## Registre public Terraform
 
 Le registre ne lit que des dépôts GitHub **publics** nommés `terraform-provider-<nom>`, et l'espace de noms
-est le compte GitHub qui possède le dépôt : `dimdams/dimdams` suppose le dépôt
-`github.com/dimdams/terraform-provider-dimdams` (organisation GitHub `dimdams`).
+est le compte GitHub qui possède le dépôt. Le nom `dimdams` étant pris sur GitHub, le dépôt est
+`github.com/Dimdam-s/terraform-provider-dimdams` et le provider s'appelle `dimdam-s/dimdams` sur le registre.
 
 Ce dossier contient déjà tout ce qu'il faut : `LICENSE` (MPL-2.0), `.goreleaser.yml`,
 `terraform-registry-manifest.json`, `.github/workflows/release.yml` (version signée à chaque tag `v*`),
@@ -49,15 +49,14 @@ Mise en place, une seule fois :
    et `PASSPHRASE`.
 4. Sur [registry.terraform.io](https://registry.terraform.io), se connecter avec GitHub, **Publish › Provider**,
    ajouter la clé GPG **publique** (`gpg --armor --export <ID>`) dans les paramètres de l'espace de noms, puis choisir le dépôt.
-5. Depuis ce dépôt : `bash scripts/publish-terraform-provider.sh git@github.com:<compte>/terraform-provider-dimdams.git v1.0.0`.
+5. Depuis ce dépôt : `bash scripts/publish-terraform-provider.sh git@github.com:Dimdam-s/terraform-provider-dimdams.git v1.0.1`.
 
 Le script n'envoie que ce dossier (`git subtree split`), jamais le reste du panel. Ensuite, chaque nouvelle
-version : committer ici, puis relancer le script avec le tag suivant. Si l'espace de noms n'est pas `dimdams`,
-remplacer `dimdams/dimdams` dans `main.go`, `examples/` et la documentation, et le chemin du module Go.
+version : committer ici, puis relancer le script avec le tag suivant.
 
 Une fois sur le registre, `terraform init` suffit côté client. Le script d'installation `public/terraform/install.sh`
 peut rester pour les machines sans accès au registre, mais un provider installé par lui est pris en priorité
-sur le registre : le client doit supprimer `~/.terraform.d/plugins/registry.terraform.io/dimdams` pour passer au registre.
+sur le registre : le client doit supprimer `~/.terraform.d/plugins/registry.terraform.io/dimdam-s` pour passer au registre.
 
 ## Nouvelle ressource
 

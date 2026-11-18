@@ -1,4 +1,4 @@
-module github.com/dimdams/terraform-provider-dimdams
+module github.com/Dimdam-s/terraform-provider-dimdams
 
 go 1.26.0
 

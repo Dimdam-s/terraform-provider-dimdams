@@ -26,7 +26,7 @@ terraform plan
 terraform {
   required_providers {
     dimdams = {
-      source = "dimdams/dimdams"
+      source = "dimdam-s/dimdams"
     }
   }
 }

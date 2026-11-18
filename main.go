@@ -7,7 +7,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/dimdams/terraform-provider-dimdams/internal/provider"
+	"github.com/Dimdam-s/terraform-provider-dimdams/internal/provider"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
@@ -22,7 +22,7 @@ func main() {
 	flag.Parse()
 
 	err := providerserver.Serve(context.Background(), provider.New(version), providerserver.ServeOpts{
-		Address: "registry.terraform.io/dimdams/dimdams",
+		Address: "registry.terraform.io/dimdam-s/dimdams",
 		Debug:   debug,
 	})
 	if err != nil {
